@@ -1,8 +1,9 @@
 const numPoints = 50000
-let renderSpeed = 2500
+let renderSpeed = 3000
 let colorEnabled = false
 let positions = []
-
+let r1=300
+let r2=300
 let counter = 0
 
 function setup() {
@@ -13,7 +14,21 @@ function setup() {
   stroke('white')
   strokeWeight(1)
 
-  _.times(10, addComplexity)
+  positions = [{
+    radius: r1,
+    arc: 0,
+    speed: 5,
+    offset: 50
+  },
+{
+    radius: r2,
+    arc: 5,
+    speed: 9,
+    offset: 20
+  }]
+  
+  // _.times(3, addComplexity)
+  draw()
 }
 
 function addComplexity() {
@@ -68,7 +83,7 @@ function draw() {
     )
   }
 
-  if(counter > 1000) {
+  if(counter > 1) {
     frameRate(0)
   }
   counter++
@@ -107,4 +122,10 @@ function getPoint(radius, angle) {
   const xCoordinate = windowWidth / 2 + radius * Math.cos(angle)
   const yCoordinate = windowHeight / 2 + radius * Math.sin(angle)
   return {x: xCoordinate, y: yCoordinate}
+}
+
+function mouseMoved() {
+  r1 = mouseX*500/windowWidth
+  r2 = mouseY*500/windowHeight
+  setup()
 }
